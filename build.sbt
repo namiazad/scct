@@ -1,10 +1,10 @@
-organization := "com.github.seratch.reaktor"
+organization := "com.github.scct"
 
 name := "scct"
 
-version := "0.2.001"
+version := "0.2-SNAPSHOT"
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.10.0-RC3"
 
 libraryDependencies <+= (scalaVersion) { v =>
   "org.scala-lang" % "scala-compiler" % v % "provided"
@@ -32,7 +32,7 @@ publishArtifact in Test := false
 
 pomIncludeRepository := { x => false }
 
-pomExtra := <url>http://seratch.github.com/scalikejdbc</url>
+pomExtra := <url>http://scct.github.com/scct</url>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -41,8 +41,8 @@ pomExtra := <url>http://seratch.github.com/scalikejdbc</url>
     </license>
   </licenses>
   <scm>
-    <url>git@github.com:seratch/scct.git</url>
-    <connection>scm:git:git@github.com:seratch/scct.git</connection>
+    <url>git@github.com:scct/scct.git</url>
+    <connection>scm:git:git@github.com:scct/scct.git</connection>
   </scm>
   <developers>
     <developer>
