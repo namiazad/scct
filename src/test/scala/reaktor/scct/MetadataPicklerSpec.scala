@@ -8,7 +8,7 @@ class MetadataPicklerSpec extends Specification {
 
   "Savin' an' loadin'" should {
     "Create new file, save object and load the object" in {
-      val f = new File(System.getProperty("java.io.tmpdir"), "scct-"+System.currentTimeMillis+".tmp")
+      val f = new File(System.getProperty("java.io.tmpdir"), "scct-" + System.currentTimeMillis + ".tmp")
       f.deleteOnExit
       f.exists must beFalse
       MetadataPickler.toFile(List(block(0)), f)
