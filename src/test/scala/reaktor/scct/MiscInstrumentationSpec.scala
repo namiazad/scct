@@ -43,5 +43,4 @@ class MiscInstrumentationSpec extends InstrumentationSpec {
                     |}""".stripMargin)
   }
 
-
 }

@@ -2,7 +2,7 @@ package reaktor.scct.report
 
 import java.io.File
 import io.Source
-import xml.{Text, Node, NodeSeq}
+import xml.{ Text, Node, NodeSeq }
 import reaktor.scct._
 
 class HtmlReporter(project: ProjectData, writer: HtmlReportWriter) extends HtmlHelper {
@@ -29,8 +29,7 @@ class HtmlReporter(project: ProjectData, writer: HtmlReportWriter) extends HtmlH
     val projects = data.forProjects
     if (projects.size > 1) {
       val header = headerRow("Total", data.percentage)
-      val items = for ((name, projectData) <- projects) yield
-        headerRow(name, projectData.percentage)
+      val items = for ((name, projectData) <- projects) yield headerRow(name, projectData.percentage)
       table(header, items.toList)
     } else {
       val header = headerRow(projects.head._1, data.percentage)
@@ -39,8 +38,7 @@ class HtmlReporter(project: ProjectData, writer: HtmlReportWriter) extends HtmlH
   }
 
   def packageSummaryReport = {
-    val items = for ((name, packageData) <- data.forPackages) yield
-      itemRow(name, packageData.percentage, packageReportFileName(name))
+    val items = for ((name, packageData) <- data.forPackages) yield itemRow(name, packageData.percentage, packageReportFileName(name))
     table(NodeSeq.Empty, items.toList)
   }
 
@@ -48,24 +46,26 @@ class HtmlReporter(project: ProjectData, writer: HtmlReportWriter) extends HtmlH
     val html =
       <div class="content">
         <div class="pkgRow header">
-          <a href={files.summary}>Summary { format(data.percentage) }</a>
+          <a href={ files.summary }>Summary { format(data.percentage) }</a>
         </div>
         {
           for ((pkg, packageData) <- data.forPackages) yield {
             <div class="pkgRow pkgLink">
-              <a href={packageReportFileName(pkg)}>
-                { pkg }&nbsp;{ format(packageData.percentage) }
+              <a href={ packageReportFileName(pkg) }>
+                { pkg }
+                &nbsp;{ format(packageData.percentage) }
               </a>
             </div> ++
-            <div class="pkgRow pkgContent">
-              { for ((clazz, classData) <- packageData.forClasses) yield
-                  <div class="pkgRow">
-                    <a href={ classHref(clazz) }>
-                      <span class="className">{ classNameHeader(clazz) }</span>&nbsp;{ format(classData.percentage) }
-                    </a>
-                  </div>
-              }
-            </div>
+              <div class="pkgRow pkgContent">
+                {
+                  for ((clazz, classData) <- packageData.forClasses) yield <div class="pkgRow">
+                                                                             <a href={ classHref(clazz) }>
+                                                                               <span class="className">{ classNameHeader(clazz) }</span>
+                                                                               &nbsp;{ format(classData.percentage) }
+                                                                             </a>
+                                                                           </div>
+                }
+              </div>
           }
         }
       </div>
@@ -84,7 +84,7 @@ class HtmlReporter(project: ProjectData, writer: HtmlReportWriter) extends HtmlH
     val rs = List("class.png", "object.png", "package.png", "trait.png", "filter_box_left.png", "filter_box_right.png",
       "jquery-1.6.1.min.js", "jquery-ui-1.8.4.custom.min.js", "style.css", "main.js", "index.html")
     rs.foreach { name =>
-      writer.write(name, IO.readResourceBytes("/html-reporting/"+name))
+      writer.write(name, IO.readResourceBytes("/html-reporting/" + name))
     }
   }
   def sourceFileReports {

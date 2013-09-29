@@ -85,7 +85,7 @@ class ConstructorInstrumentationSpec extends InstrumentationSpec {
     val y: Tree = runner.currentRun.units.next.body
     val PackageDef(_, classes) = y
     val ClassDef(_, _, _, Template(_, _, content)) = classes.head
-    val Some(DefDef(_,_,_,_,_,rhs)) = content.find(x => x.isInstanceOf[DefDef] && x.asInstanceOf[DefDef].name.toString == "<init>")
+    val Some(DefDef(_, _, _, _, _, rhs)) = content.find(x => x.isInstanceOf[DefDef] && x.asInstanceOf[DefDef].name.toString == "<init>")
     val Block(stats, _) = rhs
     stats.map(_.toString)
   }

@@ -26,7 +26,7 @@ object Coverage {
   @uncovered def invoked(compilationId: String, id: Int) {
     if (!started) return
     if (dataCompilationId != compilationId) return
-    counters(id) +=1
+    counters(id) += 1
   }
 
   private def readMetadata = {
@@ -34,7 +34,7 @@ object Coverage {
       val values = MetadataPickler.load(env.coverageFile)
       Map(values.map(x => (x.id, x)): _*)
     } catch {
-      case e:Exception => {
+      case e: Exception => {
         System.err.println("Fail: " + e)
         e.printStackTrace
         throw e
@@ -102,8 +102,8 @@ object Coverage {
   override def toString = projectName + ":" + packageName + "/" + className + ":" + sourceFile
 }
 
-@SerialVersionUID(1L) case class CoveredBlock(compilationId:String, id: Int, name: Name, offset: Int, placeHolder: Boolean) {
-  def this(compilationId:String, id: Int, name: Name, offset: Int) = this(compilationId, id, name, offset, false)
+@SerialVersionUID(1L) case class CoveredBlock(compilationId: String, id: Int, name: Name, offset: Int, placeHolder: Boolean) {
+  def this(compilationId: String, id: Int, name: Name, offset: Int) = this(compilationId, id, name, offset, false)
 
   var count = 0
 

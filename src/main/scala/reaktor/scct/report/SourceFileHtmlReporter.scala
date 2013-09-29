@@ -1,6 +1,6 @@
 package reaktor.scct.report
 
-import xml.{Unparsed, NodeSeq, Text}
+import xml.{ Unparsed, NodeSeq, Text }
 import reaktor.scct._
 import java.io.File
 import annotation.tailrec
@@ -11,7 +11,7 @@ object SourceFileHtmlReporter {
     val lines = project.sourceLoader.linesFor(sourceFile)
     new SourceFileHtmlReporter(sourceName, data, lines).report
   }
-  def cleanSourceName(sourceFile: String, baseDir:File, sourceDir:File) = {
+  def cleanSourceName(sourceFile: String, baseDir: File, sourceDir: File) = {
     val sourcePathSuffix = IO.relativePath(new File(baseDir, sourceFile), sourceDir)
     Some(sourcePathSuffix).map(_.replaceAll("//", "/")).map(s => if (s.startsWith("/")) s.substring(1) else s).get
   }
@@ -35,9 +35,9 @@ class SourceFileHtmlReporter(sourceFileName: String, data: CoverageData, lines: 
     sourceFileName.lastIndexOf('/') match {
       case -1 => <span class="header">{ sourceFileName }</span>
       case idx => {
-        val pkgName = sourceFileName.substring(0, idx+1)
-        val fileName = sourceFileName.substring(idx+1)
-        val packages = pkgName.split("/").foldLeft(NodeSeq.Empty) { (nodes, curr) => nodes ++ zeroSpace ++ Text(curr+"/") }
+        val pkgName = sourceFileName.substring(0, idx + 1)
+        val fileName = sourceFileName.substring(idx + 1)
+        val packages = pkgName.split("/").foldLeft(NodeSeq.Empty) { (nodes, curr) => nodes ++ zeroSpace ++ Text(curr + "/") }
         packages ++ <span class="header">{ zeroSpace ++ Text(fileName) }</span>
       }
     }
@@ -58,10 +58,10 @@ class SourceFileHtmlReporter(sourceFileName: String, data: CoverageData, lines: 
         val (currBlocks, nextBlocks) = blocks.partition(_.offset < maxOffset)
         val lineHtml = formatLine(line, offset, currBlocks.filter(!_.placeHolder))
         val newNames = currBlocks.map(_.name).filterNot(usedNames.contains).distinct
-        val newNamesHtml = newNames.map(n => <a id={toHtmlId(n)}/>)
+        val newNamesHtml = newNames.map(n => <a id={ toHtmlId(n) }/>)
         val rowHtml =
           <tr>
-            <td class={chooseColor(currBlocks.filter(!_.placeHolder))}>{lineNum}</td>
+            <td class={ chooseColor(currBlocks.filter(!_.placeHolder)) }>{ lineNum }</td>
             <td>{ newNamesHtml }{ lineHtml }</td>
           </tr>
         sourceLines(lineNum + 1, maxOffset, tail, nextBlocks, usedNames ++ newNames, acc ++ rowHtml)

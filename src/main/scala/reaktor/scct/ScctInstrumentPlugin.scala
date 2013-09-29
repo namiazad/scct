@@ -1,10 +1,10 @@
 package reaktor.scct
 
-import tools.nsc.plugins.{PluginComponent, Plugin}
+import tools.nsc.plugins.{ PluginComponent, Plugin }
 import java.io.File
-import tools.nsc.transform.{Transform, TypingTransformers}
+import tools.nsc.transform.{ Transform, TypingTransformers }
 import tools.nsc.symtab.Flags
-import tools.nsc.{Phase, Global}
+import tools.nsc.{ Phase, Global }
 import util.Random
 
 class ScctInstrumentPlugin(val global: Global) extends Plugin {
@@ -20,17 +20,17 @@ class ScctInstrumentPlugin(val global: Global) extends Plugin {
       } else if (opt.startsWith("basedir:")) {
         options.baseDir = new File(opt.substring("basedir:".length))
       } else {
-        error("Unknown option: "+opt)
+        error("Unknown option: " + opt)
       }
     }
   }
   override val optionsHelp: Option[String] = Some(
     "  -P:scct:projectId:<name>          identify compiled classes under project <name>\n" +
-    "  -P:scct:basedir:<dir>             set the root dir of the project being compiled"
+      "  -P:scct:basedir:<dir>             set the root dir of the project being compiled"
   )
 }
 
-class ScctInstrumentPluginOptions(val compilationId:String, var projectId:String, var baseDir:File) {
+class ScctInstrumentPluginOptions(val compilationId: String, var projectId: String, var baseDir: File) {
   def this() = this(System.currentTimeMillis.toString + Random.nextLong().toString, ScctInstrumentPluginOptions.defaultProjectName, ScctInstrumentPluginOptions.defaultBasedir)
 }
 
@@ -43,7 +43,7 @@ object ScctInstrumentPluginOptions {
   }
 }
 
-class ScctTransformComponent(val global: Global, val opts:ScctInstrumentPluginOptions) extends PluginComponent with TypingTransformers with Transform {
+class ScctTransformComponent(val global: Global, val opts: ScctInstrumentPluginOptions) extends PluginComponent with TypingTransformers with Transform {
   import global._
   import global.definitions._
 
@@ -112,7 +112,7 @@ class ScctTransformComponent(val global: Global, val opts:ScctInstrumentPluginOp
       case dd: DefDef if (t.symbol.isConstructor) => {
         (false, instrumentConstructor(t.symbol.isPrimaryConstructor, dd))
       }
-      case dd @ DefDef(_,_,_,_,_,b @ Block(List(a @ Assign(lhs,rhs)), _)) if (t.symbol.isLazy) => {
+      case dd @ DefDef(_, _, _, _, _, b @ Block(List(a @ Assign(lhs, rhs)), _)) if (t.symbol.isLazy) => {
         val newAssign = treeCopy.Assign(a, lhs, recurse(rhs))
         val newBlock = treeCopy.Block(b, List(newAssign), b.expr)
         (false, treeCopy.DefDef(t, dd.mods, dd.name, dd.tparams, dd.vparamss, dd.tpt, newBlock))
@@ -166,19 +166,19 @@ class ScctTransformComponent(val global: Global, val opts:ScctInstrumentPluginOp
     def recurse(t: Tree) = if (shouldInstrument(t)) instrument(transform(t)) else transform(t)
 
     def shouldInstrument(t: Tree) = t match {
-      case _:ClassDef => false
-      case _:ModuleDef => false
-      case _:Template => false
-      case _:TypeDef => false
-      case _:DefDef => false
-      case _:ValDef => false
-      case _:Block => false
-      case _:If => false
-      case _:Function => false
-      case _:Match => false
-      case _:CaseDef => false
-      case _:Try => false
-      case _:LabelDef => false
+      case _: ClassDef => false
+      case _: ModuleDef => false
+      case _: Template => false
+      case _: TypeDef => false
+      case _: DefDef => false
+      case _: ValDef => false
+      case _: Block => false
+      case _: If => false
+      case _: Function => false
+      case _: Match => false
+      case _: CaseDef => false
+      case _: Try => false
+      case _: LabelDef => false
       case EmptyTree => false
       case Literal(Constant(())) => false
       case _ => true
@@ -229,7 +229,7 @@ class ScctTransformComponent(val global: Global, val opts:ScctInstrumentPluginOp
     }
 
     private def rawCoverageCall(id: Int) = {
-      val fun = Select( Select( Select(Ident("reaktor"), newTermName("scct") ), newTermName("Coverage") ), newTermName("invoked") )
+      val fun = Select(Select(Select(Ident("reaktor"), newTermName("scct")), newTermName("Coverage")), newTermName("invoked"))
       Apply(fun, List(Literal(Constant(opts.compilationId)), Literal(Constant(id))))
     }
   }
@@ -246,10 +246,10 @@ class ScctTransformComponent(val global: Global, val opts:ScctInstrumentPluginOp
     def fromSymbol(s: Symbol): String = {
       def parent = s.owner.enclClass
       if (s.isPackageClass) ""
-        else if (s.isAnonymousClass) fromSymbol(parent)
-        else if (s.isPackageObjectClass) ""
-        else if (parent.isPackageClass || parent.isPackageObjectClass) s.simpleName.toString
-        else fromSymbol(parent) + "." + s.simpleName
+      else if (s.isAnonymousClass) fromSymbol(parent)
+      else if (s.isPackageObjectClass) ""
+      else if (parent.isPackageClass || parent.isPackageObjectClass) s.simpleName.toString
+      else fromSymbol(parent) + "." + s.simpleName
     }
     tree match {
       case cd: ClassDef => fromSymbol(cd.symbol)
@@ -261,21 +261,19 @@ class ScctTransformComponent(val global: Global, val opts:ScctInstrumentPluginOp
     case pd: PackageDef if pd.symbol.isEmptyPackage => "<root>"
     case pd: PackageDef => pd.symbol.fullName.toString
     case _ => if (owner.isEmptyPackageClass || owner.isEmptyPackage) "<root>"
-                else if (owner.isPackage || owner.isPackageClass) owner.fullName.toString
-                else if (owner.toplevelClass == NoSymbol) "<root>"
-                else if (owner.toplevelClass.owner.isEmptyPackageClass) "<root>"
-                else owner.toplevelClass.owner.fullName.toString
+    else if (owner.isPackage || owner.isPackageClass) owner.fullName.toString
+    else if (owner.toplevelClass == NoSymbol) "<root>"
+    else if (owner.toplevelClass.owner.isEmptyPackageClass) "<root>"
+    else owner.toplevelClass.owner.fullName.toString
   }
-
 
   def classType(s: Symbol) = {
     if (s.isEffectiveRoot) ClassTypes.Root
-      else if (s.isPackageObjectClass) ClassTypes.Package
-      else if (s.isModule || s.isModuleClass) ClassTypes.Object
-      else if (s.isTrait) ClassTypes.Trait
-      else ClassTypes.Class
+    else if (s.isPackageObjectClass) ClassTypes.Package
+    else if (s.isModule || s.isModuleClass) ClassTypes.Object
+    else if (s.isTrait) ClassTypes.Trait
+    else ClassTypes.Class
   }
-
 
   def minOffset(t: Tree) = new MinimumOffsetFinder().offsetFor(t)
 
@@ -295,7 +293,6 @@ class ScctTransformComponent(val global: Global, val opts:ScctInstrumentPluginOp
       min
     }
   }
-
 
   def registerClasses(unit: CompilationUnit) = new ClassRegisterer().apply(unit.body)
 

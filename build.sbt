@@ -1,4 +1,4 @@
-organization := "reaktor"
+organization := "com.github.scct"
 
 name := "scct"
 
@@ -13,13 +13,46 @@ libraryDependencies <+= (scalaVersion) { v =>
 }
 
 libraryDependencies ++= Seq(
-  "junit" % "junit" % "4.10" % "test",
-  "org.mockito" % "mockito-all" % "1.9.5-rc1" % "test" withSources,
-  "org.specs2" %% "specs2" % "1.12.3" % "test"
+  "junit"       %  "junit"       % "4.11"  % "test",
+  "org.mockito" %  "mockito-all" % "1.9.5" % "test",
+  "org.specs2"  %% "specs2"      % "1.14"  % "test"
 )
 
-publishTo := Some(Resolver.file("file",  new File("../gh-pages/maven-repo")))
+publishTo <<= version { (v: String) => 
+  val nexus = "https://oss.sonatype.org/"
+  if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
+  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
 
-resolvers += "scala-tools-releases" at "https://oss.sonatype.org/content/groups/scala-tools/"
+testOptions in Test <+= (scalaVersion in Test) map { (scalaVer) => 
+  Tests.Setup { () => System.setProperty("scct-test-scala-version", scalaVer) } 
+}
 
-testOptions in Test <+= (scalaVersion in Test) map { (scalaVer) => Tests.Setup { () => System.setProperty("scct-test-scala-version", scalaVer) } }
+publishMavenStyle := true
+
+publishArtifact in Test := false
+
+pomIncludeRepository := { x => false }
+
+pomExtra := <url>http://scct.github.com/scct</url>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>git@github.com:scct/scct.git</url>
+    <connection>scm:git:git@github.com:scct/scct.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>mtkopone</id>
+      <name>Mikko Koponen</name>
+      <url>http://mtkopone.github.com</url>
+    </developer>
+  </developers>
+
+scalariformSettings
+
