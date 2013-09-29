@@ -1,4 +1,7 @@
 language: scala
-
+before_script: "sbt test:compile"
+script: "sbt test"
+# Using 2.10.3 for test on travis, otherwise we hit this bug:
+#  - https://issues.scala-lang.org/browse/SI-7775
 scala:
-  - "2.10.0-RC3"
+  - "2.10.3-RC2"
