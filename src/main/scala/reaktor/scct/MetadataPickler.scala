@@ -13,7 +13,7 @@ object MetadataPickler {
     IO.readObjects(f) { readObjects(_, Nil) }
   }
 
-  @tailrec private def readObjects(in: ObjectInputStream, acc:List[CoveredBlock]): List[CoveredBlock] = {
+  @tailrec private def readObjects(in: ObjectInputStream, acc: List[CoveredBlock]): List[CoveredBlock] = {
     readObj(in) match {
       case None => acc
       case Some(o) => readObjects(in, o :: acc)

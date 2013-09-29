@@ -1,18 +1,18 @@
 package reaktor.scct
 
 import scala.tools.nsc.reporters.ConsoleReporter
-import java.io.{FileNotFoundException, File, FileOutputStream}
-import org.specs2.matcher.{Expectable, Matcher}
+import java.io.{ FileNotFoundException, File, FileOutputStream }
+import org.specs2.matcher.{ Expectable, Matcher }
 import org.specs2.mutable._
 import tools.nsc._
 
 trait InstrumentationSpec extends Specification with InstrumentationSupport {
 
   def classOffsetsMatch(s: String) = {
-    offsetsMatch("class Foo@(x: Int) {\n  "+s+"\n}")
+    offsetsMatch("class Foo@(x: Int) {\n  " + s + "\n}")
   }
   def defOffsetsMatch(s: String) = {
-    offsetsMatch("class Foo@(x: Int) {\n  def foo {\n    "+s+"\n  }\n}")
+    offsetsMatch("class Foo@(x: Int) {\n  def foo {\n    " + s + "\n  }\n}")
   }
   def offsetsMatch(s: String) = {
     _offsetsMatch(parse(0, s, InstrumentationSpec("", Nil)), false)
@@ -34,7 +34,7 @@ trait InstrumentationSupport {
   def scalaVersion = System.getProperty("scct-test-scala-version", "2.10.0-RC3")
   def debug = false
 
-  def compileFile(file: String) = compileFiles(Seq(file) :_*)
+  def compileFile(file: String) = compileFiles(Seq(file): _*)
   def compileFiles(args: String*) = {
     val settings = createSettings
     val command = new CompilerCommand(args.toList, settings)
@@ -42,11 +42,11 @@ trait InstrumentationSupport {
     try {
       (new runner.Run).compile(command.files)
     } catch {
-      case e:scala.tools.nsc.MissingRequirementError => {
+      case e: scala.tools.nsc.MissingRequirementError => {
         println("test-fail: Scala compiler is probably not finding scala jars (catch-22).\nFix paths in InstrumentationSpec:createSettings.")
         throw e
       }
-      case e:Exception => throw e
+      case e: Exception => throw e
     }
     runner
   }
@@ -64,17 +64,17 @@ trait InstrumentationSupport {
       case x if x startsWith "2.10" => "2.10"
       case x => x
     }
-    val first = new File("./target/scala-"+scalaTargetDir+"/classes")
-    val second = new File("./scct/target/scala-"+scalaTargetDir+"/classes")
+    val first = new File("./target/scala-" + scalaTargetDir + "/classes")
+    val second = new File("./scct/target/scala-" + scalaTargetDir + "/classes")
     if (first.exists) {
       // sbt || IDEA with module dir as working dir
-      "./target/scala-"+scalaTargetDir+"/classes"
+      "./target/scala-" + scalaTargetDir + "/classes"
     } else if (second.exists) {
       // IDEA, with project dir as working dir
-      "./scct/target/scala-"+scalaTargetDir+"/classes"
+      "./scct/target/scala-" + scalaTargetDir + "/classes"
     } else {
       val err = "Compiled classes not found. Looked in " + first.getAbsolutePath + " and " + second.getAbsolutePath
-      throw new FileNotFoundException(err+ " Check InstrumentationSpec:locateCompiledClasses")
+      throw new FileNotFoundException(err + " Check InstrumentationSpec:locateCompiledClasses")
     }
   }
 
@@ -103,7 +103,7 @@ trait InstrumentationSupport {
     f.getCanonicalPath
   }
 
-  def sort(data: List[CoveredBlock]) = data.sortWith { (a,b) =>
+  def sort(data: List[CoveredBlock]) = data.sortWith { (a, b) =>
     if (a.name.sourceFile == b.name.sourceFile) {
       a.offset < b.offset
     } else a.name.sourceFile < b.name.sourceFile
@@ -119,13 +119,15 @@ trait InstrumentationSupport {
     }
   }
 
-  private def splitAtMark(s: String): Tuple2[String,String] = {
+  private def splitAtMark(s: String): Tuple2[String, String] = {
     var isEscape = false
-    val idx = s.indexWhere { _ match {
-      case '@' if !isEscape => true
-      case '\\' => { isEscape = true; false }
-      case _ => { isEscape = false; false }
-    }}
+    val idx = s.indexWhere {
+      _ match {
+        case '@' if !isEscape => true
+        case '\\' => { isEscape = true; false }
+        case _ => { isEscape = false; false }
+      }
+    }
     if (idx >= 0)
       (s.substring(0, idx).replace("\\@", "@"), s.substring(idx + 1))
     else
@@ -133,7 +135,7 @@ trait InstrumentationSupport {
   }
 
   case class matchSpec(spec: InstrumentationSpec) extends Matcher[List[Int]]() {
-    def toS(l: Seq[Int]) = l.mkString("[",",","]")
+    def toS(l: Seq[Int]) = l.mkString("[", ",", "]")
 
     def apply[S <: List[Int]](s: Expectable[S]) = result(
       s.value == spec.expectedOffsets,
@@ -164,27 +166,27 @@ trait InstrumentationSupport {
         val maxOffset = offset + line.length
         val (currData, nextData) = data.partition(_ < maxOffset)
         val blocks = blockLine(line, offset, currData)
-        line.replaceAll("\t", tab) + blocks.map("\n"+_).getOrElse("") + "\n" + printOffsets(maxOffset + 1, nextData, tail)
+        line.replaceAll("\t", tab) + blocks.map("\n" + _).getOrElse("") + "\n" + printOffsets(maxOffset + 1, nextData, tail)
       }
     }
   }
   private def blockLine(line: String, offset: Int, data: Iterable[Int]): Option[String] = data match {
     case Nil => None
-    case d => Some(blockIndicators(calculateTabbedOffsets(line.toList, data.map(_ - offset).toList)) + " ("+d.mkString(":")+")")
+    case d => Some(blockIndicators(calculateTabbedOffsets(line.toList, data.map(_ - offset).toList)) + " (" + d.mkString(":") + ")")
   }
   private def calculateTabbedOffsets(line: List[Char], data: List[Int]): List[Int] = data match {
     case Nil => Nil
     case offset :: tail => {
       val (pre, post) = line.splitAt(offset)
       val numTabs = pre.count(_ == '\t')
-      (offset + (numTabs*(displayedTabWidth-1))) :: calculateTabbedOffsets(post, tail)
+      (offset + (numTabs * (displayedTabWidth - 1))) :: calculateTabbedOffsets(post, tail)
     }
   }
   private def blockIndicators(columns: List[Int]) = columns match {
     case Nil => ""
     case _ => {
-      val s = 0.to(columns.last+1).map(idx => " ").mkString
-      columns.foldLeft(s) { (result, idx) => result.substring(0,idx)+"^"+result.substring(idx+1) }
+      val s = 0.to(columns.last + 1).map(idx => " ").mkString
+      columns.foldLeft(s) { (result, idx) => result.substring(0, idx) + "^" + result.substring(idx + 1) }
     }
   }
 }
@@ -199,16 +201,16 @@ class PluginRunner(settings: Settings, debug: Boolean) extends Global(settings, 
   }
   override def computeInternalPhases() {
     val phs = List(
-      syntaxAnalyzer          -> "parse source into ASTs, perform simple desugaring",
-      analyzer.namerFactory   -> "resolve names, attach symbols to named trees",
+      syntaxAnalyzer -> "parse source into ASTs, perform simple desugaring",
+      analyzer.namerFactory -> "resolve names, attach symbols to named trees",
       analyzer.packageObjects -> "load package objects",
-      analyzer.typerFactory   -> "the meat and potatoes: type the trees",
+      analyzer.typerFactory -> "the meat and potatoes: type the trees",
       //patmat                  -> "translate match expressions",
       //superAccessors          -> "add super accessors in traits and nested classes",
       //extensionMethods        -> "add extension methods for inline classes",
       //pickler                 -> "serialize symbol tables",
       //refChecks               -> "reference/override checking, translate nested objects",
-      scctComponent           -> "That's me!"
+      scctComponent -> "That's me!"
     )
     phs foreach (addToPhasesSet _).tupled
   }

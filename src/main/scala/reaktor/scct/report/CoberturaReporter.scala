@@ -1,39 +1,38 @@
 package reaktor.scct.report
 
 import reaktor.scct.CoveredBlock
-import xml.{PrettyPrinter, NodeSeq}
+import xml.{ PrettyPrinter, NodeSeq }
 import annotation.tailrec
 
 class CoberturaReporter(project: ProjectData, writer: HtmlReportWriter) {
   val data = project.coverage
 
   def report {
-    val xml = <coverage line-rate={data.rate.getOrElse(0).toString}>
-      <packages>
-        {packages}
-      </packages>
-    </coverage>
+    val xml = <coverage line-rate={ data.rate.getOrElse(0).toString }>
+                <packages>
+                  { packages }
+                </packages>
+              </coverage>
     writer.write("cobertura.xml", new PrettyPrinter(120, 2).format(xml))
   }
 
   def packages = {
     for ((pkg, packageData) <- data.forPackages) yield {
-      <package line-rate={packageData.rate.getOrElse(0).toString} name={pkg}>
+      <package line-rate={ packageData.rate.getOrElse(0).toString } name={ pkg }>
         <classes>
-          {classes(packageData)}
+          { classes(packageData) }
         </classes>
       </package>
     }
   }
 
   def classes(packageData: CoverageData) = {
-    for ((clazz, classData) <- packageData.forClasses) yield
-      <class line-rate={classData.rate.getOrElse(0).toString} name={clazz.className} filename={clazz.sourceFile}>
-          <methods/>
-        <lines>
-          {lines(clazz.sourceFile, classData)}
-        </lines>
-      </class>
+    for ((clazz, classData) <- packageData.forClasses) yield <class line-rate={ classData.rate.getOrElse(0).toString } name={ clazz.className } filename={ clazz.sourceFile }>
+                                                               <methods/>
+                                                               <lines>
+                                                                 { lines(clazz.sourceFile, classData) }
+                                                               </lines>
+                                                             </class>
   }
 
   def lines(sourceFile: String, classData: CoverageData) = {
@@ -51,7 +50,7 @@ class CoberturaReporter(project: ProjectData, writer: HtmlReportWriter) {
         var xml = acc
         if (lineBlocks.size != 0) {
           val hits = lineBlocks.filter(_.count > 0).size
-          xml = xml ++ <line number={num.toString} hits={hits.toString}/>
+          xml = xml ++ <line number={ num.toString } hits={ hits.toString }/>
         }
         line(num + 1, maxOffset, tail, nextBlocks, xml)
       }

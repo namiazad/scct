@@ -2,7 +2,7 @@ package reaktor.scct.report
 
 import org.specs2.mutable._
 import xml.Text
-import reaktor.scct.{ClassTypes, Name, CoveredBlock}
+import reaktor.scct.{ ClassTypes, Name, CoveredBlock }
 import java.io.File
 
 class SourceFileHtmlReporterSpec extends Specification {
@@ -47,7 +47,7 @@ class SourceFileHtmlReporterSpec extends Specification {
 
   def blocks(offsets: Tuple2[Int, Boolean]*): List[CoveredBlock] = {
     val name = Name("src", ClassTypes.Class, "pkg", "clazz", "project")
-    val bs = for ((off,hit) <- offsets) yield {
+    val bs = for ((off, hit) <- offsets) yield {
       val b = new CoveredBlock("c1", off, name, off)
       if (hit) b.increment;
       b
