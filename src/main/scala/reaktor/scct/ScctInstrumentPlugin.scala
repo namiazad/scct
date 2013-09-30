@@ -57,7 +57,7 @@ class ScctTransformComponent(val global: Global, val opts: ScctInstrumentPluginO
   var saveData = true
   var counter = 0
   var data: List[CoveredBlock] = Nil
-  lazy val coverageFile = new File(global.settings.outdir.value, "coverage.data")
+  lazy val coverageFile = new File(global.settings.outputDirs.getSingleOutput.map(_.toString).getOrElse("/"), "coverage.data")
 
   def newId: Int = {
     require(counter < Integer.MAX_VALUE)
