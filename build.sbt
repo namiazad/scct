@@ -56,3 +56,4 @@ pomExtra := <url>http://scct.github.com/scct</url>
 
 scalariformSettings
 
+seq(com.github.theon.coveralls.CoverallsPlugin.coverallsSettings: _*)
