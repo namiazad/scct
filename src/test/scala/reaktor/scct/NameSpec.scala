@@ -25,6 +25,6 @@ class NameSpec extends Specification {
     name(ClassTypes.Class, "z", "a").compare(name(ClassTypes.Object, "a", "z")) must be > 0
   }
 
-  private def name(t: ClassType):Name = name(t, "a", "p")
-  private def name(t: ClassType, n: String, p: String):Name = Name("s", t, "p", n, p)
+  private def name(t: ClassType): Name = name(t, "a", "p")
+  private def name(t: ClassType, n: String, p: String): Name = Name("s", t, "p", n, p)
 }

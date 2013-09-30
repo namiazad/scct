@@ -1,8 +1,8 @@
 package reaktor.scct.report
 
-import collection.immutable.{SortedMap, TreeMap}
-import reaktor.scct.{CoveredBlock, Name}
-import java.math.{MathContext, RoundingMode}
+import collection.immutable.{ SortedMap, TreeMap }
+import reaktor.scct.{ CoveredBlock, Name }
+import java.math.{ MathContext, RoundingMode }
 
 class CoverageData(val blocks: List[CoveredBlock]) {
 

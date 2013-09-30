@@ -1,7 +1,7 @@
 package reaktor.scct.report
 
-import reaktor.scct.{ClassTypes, Name}
-import xml.{Node, NodeSeq, Text}
+import reaktor.scct.{ ClassTypes, Name }
+import xml.{ Node, NodeSeq, Text }
 
 class HtmlHelper {
   def packageReportFileName(name: String) = toFileName("pkg", name)
@@ -32,7 +32,7 @@ class HtmlHelper {
     <div class="percentages">
       <div class="bar">
         <div class="percentage">{ format(percentage) }</div>
-        <div class="greenBar" style={ "width:%spx;".format(percentage.getOrElse(0)*2) }>&nbsp;</div>
+        <div class="greenBar" style={ "width:%spx;".format(percentage.getOrElse(0) * 2) }>&nbsp;</div>
       </div>
     </div>
 
@@ -54,9 +54,9 @@ class HtmlHelper {
       case ClassTypes.Root => "package.png"
       case ClassTypes.Package => "package.png"
     }
-    <img src={img}/> ++ Text(name.className)
+    <img src={ img }/> ++ Text(name.className)
   }
   def toHtmlId(n: Name) =
-    (n.classType.toString + "_" + n.packageName.replace(".", "_") + "_" + n.className.replace(".", "_")).replace("<", "_").replace(">","_")
+    (n.classType.toString + "_" + n.packageName.replace(".", "_") + "_" + n.className.replace(".", "_")).replace("<", "_").replace(">", "_")
 
 }

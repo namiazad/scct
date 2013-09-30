@@ -52,14 +52,14 @@ class ConstructorInstrumentationSpec extends InstrumentationSpec {
       val src = "class Obj(y: String)"
       val stats = digOutConstructorStats(compileSource(src))
       stats.length mustEqual 2
-      stats(0) mustEqual "Obj.super.this()"
+      stats(0) mustEqual "Obj.super.<init>()"
       stats(1) must startWith("reaktor.scct.Coverage.invoked(")
     }
     "basic extending constructor" in {
       val src = "class Second(y: String) extends First(y); class First(x: String)"
       val stats = digOutConstructorStats(compileSource(src))
       stats.length mustEqual 2
-      stats(0) mustEqual "Second.super.this(y)"
+      stats(0) mustEqual "Second.super.<init>(y)"
       stats(1) must startWith("reaktor.scct.Coverage.invoked(")
     }
     "extension override constructors" in {
@@ -68,14 +68,14 @@ class ConstructorInstrumentationSpec extends InstrumentationSpec {
       stats.length mustEqual 4
       stats(0) must startWith("val x: Int = ")
       stats(1) must startWith("val y: Int = ")
-      stats(2) must startWith("Second.super.this()")
+      stats(2) must startWith("Second.super.<init>()")
       stats(3) must startWith("reaktor.scct.Coverage.invoked(")
     }
     "curried constructors" in {
       val src = "case class Second(p12: String, p22: String) extends First(p12)(p22); class First(p1: String)(p2: String)"
       val stats = digOutConstructorStats(compileSource(src))
       stats.length mustEqual 2
-      stats(0) mustEqual "Second.super.this(p12)(p22)"
+      stats(0) mustEqual "Second.super.<init>(p12)(p22)"
       stats(1) must startWith("reaktor.scct.Coverage.invoked(")
     }
   }
@@ -85,7 +85,7 @@ class ConstructorInstrumentationSpec extends InstrumentationSpec {
     val y: Tree = runner.currentRun.units.next.body
     val PackageDef(_, classes) = y
     val ClassDef(_, _, _, Template(_, _, content)) = classes.head
-    val Some(DefDef(_,_,_,_,_,rhs)) = content.find(x => x.isInstanceOf[DefDef] && x.asInstanceOf[DefDef].name.toString == "<init>")
+    val Some(DefDef(_, _, _, _, _, rhs)) = content.find(x => x.isInstanceOf[DefDef] && x.asInstanceOf[DefDef].name.toString == "<init>")
     val Block(stats, _) = rhs
     stats.map(_.toString)
   }

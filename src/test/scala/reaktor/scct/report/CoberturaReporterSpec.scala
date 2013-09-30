@@ -2,7 +2,7 @@ package reaktor.scct.report
 
 import org.specs2.mutable._
 import java.io.File
-import reaktor.scct.{IO, ClassTypes, Name, CoveredBlock}
+import reaktor.scct.{ IO, ClassTypes, Name, CoveredBlock }
 import xml.XML
 import org.specs2.specification.Scope
 
@@ -17,7 +17,7 @@ class CoberturaReporterSpec extends Specification {
   val name = Name(sourceFile.getName, ClassTypes.Class, "reaktor.scct.report", "CoberturaReportSpec", "scct")
 
   "report output" in new CleanEnv {
-    IO.write(sourceFile, 1.to(4).map((ii:Int) => "0123456789").mkString("\n").getBytes("utf-8"))
+    IO.write(sourceFile, 1.to(4).map((ii: Int) => "0123456789").mkString("\n").getBytes("utf-8"))
     val blocks = List(
       new CoveredBlock("c1", 0, name, 0, false).increment,
       new CoveredBlock("c1", 1, name, 11, false),
@@ -62,7 +62,7 @@ class CoberturaReporterSpec extends Specification {
   }
 
   def blocks(ii: Int, name: Name) = {
-    1.to(ii).map { ii:Int =>
+    1.to(ii).map { ii: Int =>
       val b = new CoveredBlock("c1", ii, name, ii, false)
       if (ii % 2 == 0) b.increment
       b

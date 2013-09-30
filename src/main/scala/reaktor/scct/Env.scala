@@ -28,7 +28,7 @@ object Env {
 
   def sysProps = {
     val props = new Properties
-    def put(s: String, d:String) = props.put(s, System.getProperty(s, d))
+    def put(s: String, d: String) = props.put(s, System.getProperty(s, d))
     put("scct.project.name", "default")
     put("scct.basedir", System.getProperty("user.dir", "."))
     put("scct.report.hook", "shutdown")
