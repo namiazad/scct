@@ -2,7 +2,7 @@ organization := "com.github.scct"
 
 name := "scct"
 
-version := "0.2-SNAPSHOT"
+version := "0.2"
 
 scalaVersion := "2.9.2"
 
@@ -55,3 +55,7 @@ pomExtra := <url>http://scct.github.com/scct</url>
   </developers>
 
 scalariformSettings
+
+seq(ScctBuild.instrumentSettings : _*)
+
+seq(com.github.theon.coveralls.CoverallsPlugin.coverallsSettings: _*)
