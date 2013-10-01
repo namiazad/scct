@@ -1,6 +1,4 @@
-!https://travis-ci.org/SCCT/scct.png?branch=master!:https://travis-ci.org/SCCT/scct
-
-h2. Scala Code Coverage Tool
+h1. Scala Code Coverage Tool !https://travis-ci.org/SCCT/scct.png?branch=master!:https://travis-ci.org/SCCT/scct !https://coveralls.io/repos/SCCT/scct/badge.png(Coverage Status)!:https://coveralls.io/r/SCCT/scct
 
 Available on sonatype oss and maven central repository.
 
