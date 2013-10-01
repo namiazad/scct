@@ -229,7 +229,7 @@ class ScctTransformComponent(val global: Global, val opts: ScctInstrumentPluginO
     }
 
     private def rawCoverageCall(id: Int) = {
-      val fun = Select(Select(Select(Ident("com.github"), newTermName("scct")), newTermName("Coverage")), newTermName("invoked"))
+      val fun = Select(Select(Select(Select(Ident("com"), newTermName("github")), newTermName("scct")), newTermName("Coverage")), newTermName("invoked"))
       Apply(fun, List(Literal(Constant(opts.compilationId)), Literal(Constant(id))))
     }
   }
