@@ -1,7 +1,7 @@
 package com.github.scct
 
 import org.specs2.mutable._
-import reaktor.scct.ClassTypes.ClassType
+import com.github.scct.ClassTypes.ClassType
 
 class CoverageFilterSpec extends Specification {
 
