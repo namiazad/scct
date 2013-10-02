@@ -1,4 +1,4 @@
-package reaktor.scct
+package com.github.scct
 
 import org.specs2.mutable._
 import reaktor.scct.ClassTypes.ClassType

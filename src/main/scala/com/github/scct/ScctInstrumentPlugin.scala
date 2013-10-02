@@ -21,7 +21,7 @@ class ScctInstrumentPlugin(val global: Global) extends Plugin {
       } else if (opt.startsWith("basedir:")) {
         options.baseDir = new File(opt.substring("basedir:".length))
       } else if (opt.startsWith("excludePackages:")) {
-        options.excludePackages  = opt.substring("excludePackages:".length).split(",").filter(_.length > 0).map(_.r)
+        options.excludePackages = opt.substring("excludePackages:".length).split(",").filter(_.length > 0).map(_.r)
       } else {
         error("Unknown option: " + opt)
       }
@@ -29,11 +29,11 @@ class ScctInstrumentPlugin(val global: Global) extends Plugin {
   }
   override val optionsHelp: Option[String] = Some(
     "  -P:scct:projectId:<name>                 identify compiled classes under project <name>\n" +
-    "  -P:scct:basedir:<dir>                    set the root dir of the project being compiled\n"
+      "  -P:scct:basedir:<dir>                    set the root dir of the project being compiled\n"
   )
 }
 
-class ScctInstrumentPluginOptions(val compilationId:String, var projectId:String, var baseDir:File, var excludePackages: Array[Regex] = Array()) {
+class ScctInstrumentPluginOptions(val compilationId: String, var projectId: String, var baseDir: File, var excludePackages: Array[Regex] = Array()) {
   def this() = this(System.currentTimeMillis.toString + Random.nextLong().toString, ScctInstrumentPluginOptions.defaultProjectName, ScctInstrumentPluginOptions.defaultBasedir)
 }
 
@@ -74,7 +74,6 @@ class ScctTransformComponent(val global: Global, val opts: ScctInstrumentPluginO
       super.run
       saveMetadata
     }
-
 
     private def saveMetadata {
       if (saveData) {
