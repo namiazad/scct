@@ -66,3 +66,7 @@ Merge all the existing child reports into $parentProjectDir/target/scala_<ver>/c
 <pre>
 $ sbt scct-merge-report
 </pre>
+
+h2. Who is using it
+
+!http://corporate.tomtom.com/images/tomtom-logo_tcm166-3340.png!:http://www.tomtom.com/
