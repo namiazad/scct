@@ -2,12 +2,71 @@ h1. Scala Code Coverage Tool !https://travis-ci.org/SCCT/scct.png?branch=master!
 
 Available on sonatype oss and maven central repository.
 
+h3. What does it look like ? 
+
+!http://scct.github.io/scct/screenshot.png!:http://scct.github.io/scct/report/index.html
+
 h3. Scala versions
 
 2.10.x, 2.9.3, 2.9.2 and 2.9.1.
 
-h3. sbt settings
+h2. Install
+
+h3. Add the plugin to your build with the following in project/build.sbt:
 
 <pre>
-libraryDependencies += "com.github.scct" %% "scct" % "0.2-SNAPSHOT"
+addSbtPlugin("com.github.scct" % "sbt-scct" % "0.2")
+</pre>			
+
+h3. Add the plugin settings to your project, at build.sbt:
+
+<pre>
+seq(sbt.scct.ScctPlugin.instrumentSettings : _*)
 </pre>
+        
+h3. Run your unit tests :
+
+<pre>
+$ sbt clean scct:test
+</pre>
+
+Then open:
+
+<pre>
+./target/scala_2.9.2/coverage-report/index.html
+</pre>
+
+h3. Multiproject builds
+
+Add the plugin instrumentation settings to child projects and the report merging settings to the parent project.
+For example project/MyBuild.scala:
+
+<pre>
+object MyBuild extends Build {
+  lazy val root = Project(id = "parent", base = file("."))
+      settings (sbt.scct.ScctPlugin.mergeReportSettings: _*) aggregate(first, second)
+
+  lazy val firstChild = Project(id = "firstchild", base = file("first"))
+      settings (sbt.scct.ScctPlugin.instrumentSettings: _*)
+
+  lazy val secondChild = Project(id = "secondchild", base = file("second"))
+      settings (sbt.scct.ScctPlugin.instrumentSettings: _*)
+}
+</pre>
+        
+Run coverage for all child projects with:
+
+<pre>
+$ sbt clean scct:test
+</pre>
+
+This creates individual coverage reports into $childProjectDir/target/scala_<ver>/coverage-report/
+Merge all the existing child reports into $parentProjectDir/target/scala_<ver>/coverage-report/ with:
+
+<pre>
+$ sbt scct-merge-report
+</pre>
+
+h2. Who is using it
+
+!http://corporate.tomtom.com/images/tomtom-logo_tcm166-3340.png!:http://www.tomtom.com/
