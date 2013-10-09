@@ -2,7 +2,7 @@ organization := "com.github.scct"
 
 name := "scct"
 
-version := "0.2"
+version := "0.2-SNAPSHOT"
 
 scalaVersion := "2.9.2"
 
