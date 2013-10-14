@@ -47,7 +47,7 @@ class Env {
   lazy val reportHook = prop("scct.report.hook")
   lazy val reportDir = new File(prop("scct.report.dir"))
 
-  /** Where the source files actually start from, so e.g. $PROJECTHOME/src/main/scala/ */
+  /** Where the source files actually start from, so e.g. PROJECTHOME/src/main/scala/ */
   lazy val sourceDir = new File(prop("scct.source.dir"))
 
   lazy val excludes = prop("scct.excluded.paths.regex")
