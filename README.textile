@@ -10,6 +10,8 @@ h3. Scala versions
 
 2.10.x, 2.9.3, 2.9.2 and 2.9.1.
 
+Join the "SCCT":http://groups.google.com/group/scala-code-coverage-tool google group for help, bug reports, feature requests, and general discussion on SCCT.
+
 h2. Install
 
 h3. Add the plugin to your build with the following in project/build.sbt:
