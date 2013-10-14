@@ -50,6 +50,8 @@ class Env {
   /** Where the source files actually start from, so e.g. $PROJECTHOME/src/main/scala/ */
   lazy val sourceDir = new File(prop("scct.source.dir"))
 
+  lazy val excludes = prop("scct.excluded.paths.regex")
+
   def coverageFile = Env.sysOption("scct.coverage.file").map(new File(_)).getOrElse(new File(getClass.getResource("/coverage.data").toURI))
 }
 

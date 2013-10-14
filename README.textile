@@ -18,6 +18,13 @@ h3. Add the plugin to your build with the following in project/build.sbt:
 addSbtPlugin("com.github.scct" % "sbt-scct" % "0.2")
 </pre>			
 
+h4. Or you can use the last Snapshot instead
+
+<pre>
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+addSbtPlugin("com.github.scct" % "sbt-scct" % "0.3-SNAPSHOT")
+</pre>
+
 h3. Add the plugin settings to your project, at build.sbt:
 
 <pre>
