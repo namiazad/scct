@@ -12,7 +12,7 @@ scala:
   - "2.10.3-RC2"
 
 # Sonatype secure
-env:
-  global:
-  - secure: "UJh2caCAZsoRpXChgZDqRwe4td3hqo8KTjzr42X8SMFjRLvnxpoHDyEmGRRdX/pkdU6ktga0k7CDGVFwLYSttRZY4GojF+F1bInv3gmFEvsS/6ZNy01q75mg+QIcuOZeyYH2ziGy4kLkAWYCM8fGqtnYLZQks1isu4zpIqujGwk="
-  - secure: "m7n/S66NeaO8fWMqPGjesELkWvjpQxFdFmoSMylerXvnY+xwRx1xYHiWrEOrG8kB/kX6+BCwan1QsJ6qn3HPaetG+iTg/AR9mHMy+CgCKhub+V7oy+EXmtaarsAMvxoRxpx9RGrwoFRlozm+fNnSdoY4kt0QNCJOXXY1F8igaes="
+env: 
+  global: 
+    secure: c4ol73ULGGt4QnGXrWeq8/a23mpV1LvgD3DaZ2mwXr1S040GcTh3nnL6Z0VH1PRgOv8fxP4LHWOm25hGoIYjsZSzcxpE47rxEpN4CT9Tr/+qU5GHRor0BBeNLCejII0GcIMG2dfa7QYrI0q6pXUKI7BvbubhJJQH43J2m2VIfdg=
+    secure: AE0pDy9REc5jlKQ82J1yYog71JSNyITvFWQ9ZwIwDWP0DTXfE53OEwM+AgAsRl2MGEdlAVkoFanJFlUkxKtn48oVqhx8vQlocXff0pptCOyfAL3sAlaGKzPcFZiym1N8FSPX1aYcwoPCTUa/d8XZq2U7Xzf7HPY7GXmbjUzVsaw=
