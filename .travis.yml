@@ -4,7 +4,7 @@ script: "sbt test"
 
 after_script:
   - sbt coveralls
-  - if [[ $TRAVIS_TEST_RESULT == 0 && "$TRAVIS_BRANCH" == "master" ]]; then sbt -Dbuild.publish.user="${SONATYPE_USER}" -Dbuild.publish.password="${SONATYPE_PASS}" ++$TRAVIS_SCALA_VERSION "publish"; fi
+  - if [[ $TRAVIS_TEST_RESULT == 0 && "$TRAVIS_BRANCH" == "master" ]]; then sbt "+publish"; fi
 
 # Using 2.10.3 for test on travis, otherwise we hit this bug:
 #  - https://issues.scala-lang.org/browse/SI-7775
