@@ -76,6 +76,12 @@ Merge all the existing child reports into $parentProjectDir/target/scala_<ver>/c
 $ sbt scct-merge-report
 </pre>
 
+h2. Jenkins
+
+If you want to integrate your code coverage into Jenkins, you will need to install "Cobertura plugin":https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin and add the post-build action.
+!https://d233eq3e3p3cv0.cloudfront.net/max/800/0*Ly-UfeaQGAO36ZwK.png!
+!https://d233eq3e3p3cv0.cloudfront.net/max/1235/0*7CVN-giWRJxiGy-L.png!
+
 h2. Who is using it
 
 !http://corporate.tomtom.com/images/tomtom-logo_tcm166-3340.png!:http://www.tomtom.com/
