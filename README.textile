@@ -17,7 +17,7 @@ h2. Install
 h3. Add the plugin to your build with the following in project/build.sbt:
 
 <pre>
-addSbtPlugin("com.github.scct" % "sbt-scct" % "0.2")
+addSbtPlugin("com.github.scct" % "sbt-scct" % "0.2.1")
 </pre>			
 
 h4. Or you can use the last Snapshot instead
