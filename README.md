@@ -1,11 +1,11 @@
-Scala Code Coverage Tool ![](https://travis-ci.org/SCCT/scct.png?branch=master):https://travis-ci.org/SCCT/scct ![Coverage Status](https://coveralls.io/repos/SCCT/scct/badge.png "Coverage Status"):https://coveralls.io/r/SCCT/scct
+Scala Code Coverage Tool [![Build Status](https://travis-ci.org/SCCT/scct.png?branch=master)](https://travis-ci.org/SCCT/scct) [![Coverage Status](https://coveralls.io/repos/SCCT/scct/badge.png?branch=master)](https://coveralls.io/r/SCCT/scct?branch=master)
 =====================================================================================================================================================================================================================================
 
 Available on sonatype oss and maven central repository.
 
 ### What does it look like ?
 
-![](http://scct.github.io/scct/screenshot.png):http://scct.github.io/scct/report/index.html
+![](http://scct.github.io/scct/screenshot.png)
 
 ### Scala versions
 
@@ -73,11 +73,11 @@ Jenkins
 If you want to integrate your code coverage into Jenkins, you will need
 to install [Cobertura
 plugin](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin)
-and add the post-build action.\
-![](https://d233eq3e3p3cv0.cloudfront.net/max/800/0*Ly-UfeaQGAO36ZwK.png)\
+and add the post-build action.
+![](https://d233eq3e3p3cv0.cloudfront.net/max/800/0*Ly-UfeaQGAO36ZwK.png)
 ![](https://d233eq3e3p3cv0.cloudfront.net/max/1235/0*7CVN-giWRJxiGy-L.png)
 
 Who is using it
 ---------------
 
-![](http://corporate.tomtom.com/images/tomtom-logo_tcm166-3340.png):http://www.tomtom.com/
+[![TomTom](http://corporate.tomtom.com/images/tomtom-logo_tcm166-3340.png)](http://www.tomtom.com)
