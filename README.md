@@ -3,6 +3,10 @@ Scala Code Coverage Tool [![Build Status](https://travis-ci.org/SCCT/scct.png?br
 
 Available on sonatype oss and maven central repository.
 
+Join the [SCCT](http://groups.google.com/group/scala-code-coverage-tool)
+google group for help, bug reports, feature requests, and general
+discussion on SCCT.
+
 ### What does it look like ?
 
 ![](http://scct.github.io/scct/screenshot.png)
@@ -10,10 +14,6 @@ Available on sonatype oss and maven central repository.
 ### Scala versions
 
 2.10.x, 2.9.3, 2.9.2 and 2.9.1.
-
-Join the [SCCT](http://groups.google.com/group/scala-code-coverage-tool)
-google group for help, bug reports, feature requests, and general
-discussion on SCCT.
 
 Install
 -------
@@ -67,15 +67,21 @@ Merge all the existing child reports into
 
     $ sbt scct-merge-report
 
-Jenkins
--------
+Integrations
+------------
 
+### Jenkins
 If you want to integrate your code coverage into Jenkins, you will need
 to install [Cobertura
 plugin](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin)
 and add the post-build action.
 ![](https://d233eq3e3p3cv0.cloudfront.net/max/800/0*Ly-UfeaQGAO36ZwK.png)
 ![](https://d233eq3e3p3cv0.cloudfront.net/max/1235/0*7CVN-giWRJxiGy-L.png)
+
+### Coveralls
+A sbt plugin is available in case you need your coverage reports to be uploaded to https://coveralls.io :
+
+[xsbt-coveralls-plugin](https://github.com/theon/xsbt-coveralls-plugin)
 
 Who is using it
 ---------------
