@@ -1,9 +1,8 @@
 language: scala
 before_script: "sbt test:compile"
-script: "sbt test"
+script: "sbt coveralls"
 
 after_script:
-  - sbt coveralls
   - if [[ $TRAVIS_TEST_RESULT == 0 && "$TRAVIS_BRANCH" == "master" ]]; then sbt "+publish"; fi
 
 # Using 2.10.3 for test on travis, otherwise we hit this bug:
