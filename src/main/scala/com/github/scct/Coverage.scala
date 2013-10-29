@@ -63,9 +63,12 @@ object Coverage {
   }
 
   private def filteredData: List[CoveredBlock] = {
-    val excludedPaths = env.excludes.split(",").filter(_.length > 0).map(_.r)
-    val filter = new CoverageFilter(excludedPaths)
-    filter.filter(dataValues)
+    env.excludes match {
+      case excludes: String => {
+        new CoverageFilter(excludes.split(",").filter(_.length > 0).map(_.r)).filter(dataValues)
+      }
+      case _ => dataValues
+    }
   }
 
   private def setupShutdownHook {
