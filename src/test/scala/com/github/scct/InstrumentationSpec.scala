@@ -31,7 +31,7 @@ trait InstrumentationSpec extends Specification with InstrumentationSupport {
 }
 
 trait InstrumentationSupport {
-  def scalaVersion = System.getProperty("scct-test-scala-version", "2.10.0-RC3")
+  def scalaVersion = System.getProperty("scct-test-scala-version", "2.10.3")
   def debug = false
 
   def compileFile(file: String) = compileFiles(Seq(file): _*)

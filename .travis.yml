@@ -8,7 +8,7 @@ after_script:
 # Using 2.10.3 for test on travis, otherwise we hit this bug:
 #  - https://issues.scala-lang.org/browse/SI-7775
 scala:
-  - "2.10.3-RC2"
+  - "2.10.3"
 
 # Sonatype secure
 env:

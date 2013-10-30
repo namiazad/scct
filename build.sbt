@@ -4,9 +4,9 @@ name := "scct"
 
 version := "0.3-SNAPSHOT"
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.10.3"
 
-crossScalaVersions := Seq("2.10.2")
+crossScalaVersions := Seq("2.10.3")
 
 libraryDependencies <+= (scalaVersion) { v =>
   "org.scala-lang" % "scala-compiler" % v % "provided"
