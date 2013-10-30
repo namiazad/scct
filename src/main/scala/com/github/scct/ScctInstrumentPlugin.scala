@@ -99,10 +99,10 @@ class ScctTransformComponent(val global: Global, val opts: ScctInstrumentPluginO
       if (continue) super.transform(result) else result
     }
 
-    private def hasSkipAnnotation(t: Tree) = t.hasSymbol && t.symbol.hasAnnotation(definitions.getClass(global.stringToTypeName("com.github.scct.uncovered")))
+    private def hasSkipAnnotation(t: Tree) = t.hasSymbol && t.symbol.hasAnnotation(rootMirror.getClassByName(global.stringToTypeName("com.github.scct.uncovered")))
     private def isSynthetic(t: Tree) = t.hasSymbol && t.symbol.isSynthetic && !t.symbol.isAnonymousFunction
     private def isObjectOrTraitConstructor(s: Symbol) = s.isConstructor && (currentClass.isModuleClass || currentClass.isTrait)
-    private def isGeneratedMethod(t: DefDef) = !t.symbol.isConstructor && t.pos.point == currentClass.pos.point
+    private def isGeneratedMethod(t: DefDef) = !t.symbol.isConstructor && currentClass.pos != NoPosition && t.pos.point == currentClass.pos.point
     private def isAbstractMethod(t: DefDef) = t.symbol.isDeferred
     private def isNonLazyStableMethodOrAccessor(t: DefDef) = !t.symbol.isLazy && (t.symbol.isStable || t.symbol.hasFlag(Flags.ACCESSOR))
     private def isInAnonymousClass = currentClass.isAnonymousClass
