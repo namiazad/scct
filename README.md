@@ -29,7 +29,7 @@ Install
 
 ### Add the plugin settings to your project, at build.sbt:
 
-    seq(ScctPlugin.instrumentSettings : _*)
+    ScctPlugin.instrumentSettings
 
 ### Run your unit tests :
 
