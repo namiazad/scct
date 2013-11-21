@@ -67,23 +67,23 @@ Merge all the existing child reports into
 
     $ sbt scct-merge-report
 
-Integrations
-------------
 
-### Jenkins
-If you want to integrate your code coverage into Jenkins, you will need
-to install [Cobertura
-plugin](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin)
-and add the post-build action.
-![](https://d233eq3e3p3cv0.cloudfront.net/max/800/0*Ly-UfeaQGAO36ZwK.png)
-![](https://d233eq3e3p3cv0.cloudfront.net/max/1235/0*7CVN-giWRJxiGy-L.png)
+### Integrations
+- [Coveralls](https://github.com/theon/xsbt-coveralls-plugin)
+- [Jenkins](https://github.com/SCCT/scct/wiki/Jenkins)
 
-### Coveralls
-A sbt plugin is available in case you need your coverage reports to be uploaded to https://coveralls.io :
+### Learn More
+- [Use SCCT with Maven](https://github.com/SCCT/scct/wiki/Maven)
+- [Use SCCT Standalone](https://github.com/SCCT/scct/wiki/Standalone)
+- [Who is using it](https://github.com/SCCT/scct/wiki/Who-is-using-it)
 
-[xsbt-coveralls-plugin](https://github.com/theon/xsbt-coveralls-plugin)
 
-Who is using it
----------------
+### License
 
-[![TomTom](http://corporate.tomtom.com/images/tomtom-logo_tcm166-3340.png)](http://www.tomtom.com)
+This software is licensed under the Apache 2 license, quoted below.
+
+Copyright 2013 SCCT(https://github.com/SCCT/scct).
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this project except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
