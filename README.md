@@ -70,6 +70,7 @@ Merge all the existing child reports into
 
 ### Integrations
 - [Coveralls](https://github.com/theon/xsbt-coveralls-plugin)
+- [Gradle](https://github.com/maiflai/gradle-scct)
 - [Jenkins](https://github.com/SCCT/scct/wiki/Jenkins)
 
 ### Learn More
