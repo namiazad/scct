@@ -1,4 +1,4 @@
-Scala Code Coverage Tool [![Build Status](https://travis-ci.org/SCCT/scct.png?branch=master)](https://travis-ci.org/SCCT/scct) [![Coverage Status](https://coveralls.io/repos/SCCT/scct/badge.png?branch=master)](https://coveralls.io/r/SCCT/scct?branch=master)
+Scala Code Coverage Tool [![Build Status](https://travis-ci.org/sqality/scct.png?branch=master)](https://travis-ci.org/sqality/scct) [![Coverage Status](https://coveralls.io/repos/SCCT/scct/badge.png?branch=master)](https://coveralls.io/r/SCCT/scct?branch=master)
 =====================================================================================================================================================================================================================================
 
 Available on sonatype oss and maven central repository.
