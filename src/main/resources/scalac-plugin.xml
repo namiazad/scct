@@ -1,4 +1,4 @@
 <plugin>
   <name>scctInstrumentation</name>
-  <classname>com.github.scct.ScctInstrumentPlugin</classname>
+  <classname>com.sqality.scct.ScctInstrumentPlugin</classname>
 </plugin>
