@@ -9,7 +9,7 @@ discussion on SCCT.
 
 ### What does it look like ?
 
-![](http://scct.github.io/scct/screenshot.png)
+![](http://sqality.github.io/scct/screenshot.png)
 
 ### Scala versions
 
@@ -20,12 +20,12 @@ Install
 
 ### Add the plugin to your build with the following in project/build.sbt:
 
-    addSbtPlugin("com.github.scct" % "sbt-scct" % "0.2.1")
+    addSbtPlugin("com.sqality.scct" % "sbt-scct" % "0.2.1")
 
 #### Or you can use the last Snapshot instead
 
     resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
-    addSbtPlugin("com.github.scct" % "sbt-scct" % "0.3-SNAPSHOT")
+    addSbtPlugin("com.sqality.scct" % "sbt-scct" % "0.3-SNAPSHOT")
 
 ### Add the plugin settings to your project, at build.sbt:
 
@@ -70,20 +70,20 @@ Merge all the existing child reports into
 
 ### Integrations
 - [Coveralls](https://github.com/theon/xsbt-coveralls-plugin)
-- [Gradle](https://github.com/maiflai/gradle-scct)
-- [Jenkins](https://github.com/SCCT/scct/wiki/Jenkins)
+- [Gradle](https://github.com/sqality/gradle-scct)
+- [Jenkins](https://github.com/sqality/scct/wiki/Jenkins)
 
 ### Learn More
-- [Use SCCT with Maven](https://github.com/SCCT/scct/wiki/Maven)
-- [Use SCCT Standalone](https://github.com/SCCT/scct/wiki/Standalone)
-- [Who is using it](https://github.com/SCCT/scct/wiki/Who-is-using-it)
+- [Use SCCT with Maven](https://github.com/sqality/scct/wiki/Maven)
+- [Use SCCT Standalone](https://github.com/sqality/scct/wiki/Standalone)
+- [Who is using it](https://github.com/sqality/scct/wiki/Who-is-using-it)
 
 
 ### License
 
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2013 SCCT(https://github.com/SCCT/scct).
+Copyright 2013 SCCT(http://sqality.com).
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this project except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
 
