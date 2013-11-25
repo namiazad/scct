@@ -1,4 +1,4 @@
-organization := "com.github.scct"
+organization := "com.sqality.scct"
 
 name := "scct"
 
@@ -34,7 +34,7 @@ publishArtifact in Test := false
 
 pomIncludeRepository := { x => false }
 
-pomExtra := <url>http://scct.github.com/scct</url>
+pomExtra := <url>http://sqality.com</url>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -43,14 +43,18 @@ pomExtra := <url>http://scct.github.com/scct</url>
     </license>
   </licenses>
   <scm>
-    <url>git@github.com:scct/scct.git</url>
-    <connection>scm:git:git@github.com:scct/scct.git</connection>
+    <url>git@github.com:sqality/scct.git</url>
+    <connection>scm:git:git@github.com:sqality/scct.git</connection>
   </scm>
   <developers>
     <developer>
       <id>mtkopone</id>
       <name>Mikko Koponen</name>
       <url>http://mtkopone.github.com</url>
+    </developer>
+    <developer>
+      <id>D-Roch</id>
+      <name>Roch Delsalle</name>
     </developer>
   </developers>
 
