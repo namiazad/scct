@@ -1,17 +1,11 @@
 language: scala
-before_script: "sbt test:compile"
-script: "sbt coveralls"
-
+before_script: sbt test:compile
+script: sbt coveralls
 after_script:
-  - if [[ $TRAVIS_TEST_RESULT == 0 && "$TRAVIS_BRANCH" == "master" ]]; then sbt "+publish"; fi
-
-# Using 2.10.3 for test on travis, otherwise we hit this bug:
-#  - https://issues.scala-lang.org/browse/SI-7775
+- if [[ $TRAVIS_TEST_RESULT == 0 && "$TRAVIS_BRANCH" == "master" ]]; then sbt "+publish";
+  fi
 scala:
-  - "2.10.3"
-
-# Sonatype secure
+- 2.10.3
 env:
   global:
-  - secure: eZJcAnVbI4izf7UoVRg2lOx0vNVZ884N0N5JXpD3Ae26E5lJE75T5FFj5PCMIbUh1rFocSFBhXKJHpUUv8FV67R38RqhN0Fe7C6CrXrKwdYY9c19l73oBYGx+ZuBRYSDwP9q1Jgv3LILtdswGjCeGt0kd4xsQhUqe5HXLPa6w5A=
-  - secure: ABrfuDH24PD0vMdjrOjkIBw1VfjpWLo493cOpeJk7O81d7pSIrviERFetqUA/q4kTSTgiRtMTQVYWlJ287WYF3HD2XgkgRMefdfq8ezqm++GvXza9YSYmVtl/ZK7Tv2HtuwfPR3HclIXoE7HyRBiNjZ53d5PWtZ8OSdLGP+wWBo=
+  - secure: bFayTjVb51z7JDadYON6D/C8rmTCyoNrXaDnoCQtAAHssYBJM89loN7I7lwGRCmYciX2sbaPrzlwCVjHzra9itjGmw0BUIa+43G7BzI9tZXHXldIL1HjzbaRnZRynr7i463LRP2oCXlZu2QrS81jkBrpufsChd05UCcphWgz920=
