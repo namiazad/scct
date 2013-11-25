@@ -242,9 +242,9 @@ class ScctTransformComponent(val global: Global, val opts: ScctInstrumentPluginO
   }
 
   private def createName(owner: Symbol, tree: Tree) = {
-    val src = tree.pos.source.file match {
-      case null => "<no file>"
-      case f => IO.relativePath(f.file, opts.baseDir)
+    val src = tree.pos match {
+      case pos if pos.isDefined && pos.source.file.exists => IO.relativePath(pos.source.file.file, opts.baseDir)
+      case _ => "<no file>"
     }
     Name(src, classType(owner), packageName(tree, owner), className(tree, owner), opts.projectId)
   }
