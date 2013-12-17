@@ -26,7 +26,7 @@ class SourceFileHtmlReporter(sourceFileName: String, data: CoverageData, lines: 
   }
 
   def sourceFileTableHeader = {
-    val header = itemRow(sourceFileHeader, data.percentage, "#")
+    val header = itemRow(sourceFileHeader, data.percentage, "#", data.ratioDetail)
     val classRows = classItemRows(data)
     <table class="classes"><tbody>{ header }{ classRows }</tbody></table>
   }
@@ -87,7 +87,7 @@ class SourceFileHtmlReporter(sourceFileName: String, data: CoverageData, lines: 
       case Nil => acc ++ formatLinePart(prevChars ::: line, isCovered)
       case block :: tail => {
         val (currChars, nextChars) = line.splitAt(block.offset - offset)
-        if (isCovered == block.count > 0) {
+        if (isCovered == (block.count > 0)) {
           formatLine(prevChars ::: currChars, nextChars, block.offset, isCovered, tail, acc)
         } else {
           val part = formatLinePart(prevChars ::: currChars, isCovered)
