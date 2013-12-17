@@ -28,17 +28,17 @@ class HtmlReporter(project: ProjectData, writer: HtmlReportWriter) extends HtmlH
   def projectSummaryReport = {
     val projects = data.forProjects
     if (projects.size > 1) {
-      val header = headerRow("Total", data.percentage)
-      val items = for ((name, projectData) <- projects) yield headerRow(name, projectData.percentage)
+      val header = headerRow("Total", data.percentage, data.ratioDetail)
+      val items = for ((name, projectData) <- projects) yield headerRow(name, projectData.percentage, projectData.ratioDetail)
       table(header, items.toList)
     } else {
-      val header = headerRow(projects.head._1, data.percentage)
+      val header = headerRow(projects.head._1, data.percentage, data.ratioDetail)
       table(header, NodeSeq.Empty)
     }
   }
 
   def packageSummaryReport = {
-    val items = for ((name, packageData) <- data.forPackages) yield itemRow(name, packageData.percentage, packageReportFileName(name))
+    val items = for ((name, packageData) <- data.forPackages) yield itemRow(name, packageData.percentage, packageReportFileName(name), packageData.ratioDetail)
     table(NodeSeq.Empty, items.toList)
   }
 
@@ -74,7 +74,7 @@ class HtmlReporter(project: ProjectData, writer: HtmlReportWriter) extends HtmlH
 
   def packageReports {
     for ((pkg, packageData) <- data.forPackages) {
-      val header = headerRow(pkg, packageData.percentage)
+      val header = headerRow(pkg, packageData.percentage, packageData.ratioDetail)
       val items = classItemRows(packageData)
       writer.write(packageReportFileName(pkg), table(header, items))
     }

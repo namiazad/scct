@@ -45,11 +45,19 @@ class CoverageData(val blocks: List[CoveredBlock]) {
 
   lazy val percentage: Option[Int] = rate map { it => (it * 100).toInt }
 
+  lazy val nonPlaceHolderBlocks: List[CoveredBlock] = blocks.filter(!_.placeHolder)
+
+  private lazy val nonPlaceHolderBlocksSize = nonPlaceHolderBlocks.length
+
+  private lazy val coveredBlocksSize = nonPlaceHolderBlocks.foldLeft(0) { (sum, b) => if (b.count > 0) sum + 1 else sum }
+
+  lazy val ratioDetail = (coveredBlocksSize, nonPlaceHolderBlocksSize)
+
   lazy val rate: Option[BigDecimal] = {
-    blocks.filter(!_.placeHolder) match {
+    nonPlaceHolderBlocks match {
       case List() => None
       case list => {
-        val sum = BigDecimal(list.foldLeft(0) { (sum, b) => if (b.count > 0) sum + 1 else sum }, RATE_MATH_CONTEXT)
+        val sum = BigDecimal(coveredBlocksSize, RATE_MATH_CONTEXT)
         Some(sum / list.size)
       }
     }
